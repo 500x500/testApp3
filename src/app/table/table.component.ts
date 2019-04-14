@@ -3,14 +3,14 @@ import {Component} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {AppService} from '../services/app.service';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+// export interface PeriodicElement {
+//   name: string;
+//   position: number;
+//   weight: number;
+//   symbol: string;
+// }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const USER_DATA: formArray[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
 ];
 
@@ -23,9 +23,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './table.component.html',
 })
 export class TableComponent {
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
- //dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  displayedColumns: string[] = ['select', 'position', 'name', 'dob', 'sex', 'snils'];
+
+  selection = new SelectionModel<formArray>(true, []);
 
   constructor(private dataSource: AppService) {}
 
@@ -44,7 +44,7 @@ export class TableComponent {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
+  checkboxLabel(row?: formArray): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
