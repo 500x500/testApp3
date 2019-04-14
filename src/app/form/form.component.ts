@@ -1,28 +1,48 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AppService} from '../services/app.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css'],
+  styleUrls: ['./form.component.css']
 })
 
-export class FormComponent {
-  formGroup = this.fb.group({
-    name: [''],
-    dob: [''],
-  users: this.fb.array([this.fb.control('')])
-});
+export class FormComponent implements OnInit {
 
-constructor(private fb: FormBuilder) {}
+  formGroup: FormGroup;
+  constructor(private formBuilder: FormBuilder, private dataSource: AppService) {}
 
-get users() {
-  return this.formGroup.get('users') as FormArray;
+
+  ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      formArray: this.formBuilder.array([
+        this.formBuilder.group({
+          name: ['', Validators.required],
+        }),
+        this.formBuilder.group({
+          dob: ['', Validators.required],
+        }),
+        this.formBuilder.group({
+          sex: ['', Validators.required],
+        }),
+        this.formBuilder.group({
+          snils: ['', Validators.required],
+        }),
+      ])
+    });
   }
-  onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.formGroup.value);
+
+  Sex: sex[] = [
+    {value: 'Женский', viewValue: 'Женский'},
+    {value: 'Мужской', viewValue: 'Мужской'},
+  ];
+
+addArray() {
+    console.log(this.formGroup.value);
+  };
+addUser(e) {
+    this.dataSource.formArray.push(e.value);
   }
 }
 

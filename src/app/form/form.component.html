@@ -1,35 +1,59 @@
-<mat-card>
-      <form [formGroup]="formGroup" #stepper (ngSubmit)="onSubmit()">
-        <mat-horizontal-stepper formArrayName="users" [linear]="false">
-          <mat-step>
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="Last name, First name" formControlName="name" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperNext type="button">Next</button>
-            </div>
-          </mat-step>
+<form [formGroup]="formGroup" (ngSubmit)="addUser(formGroup)">
+  <mat-horizontal-stepper formArrayName="formArray" linear  #stepper>
+    <!-- ФИО -->
+    <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+      <ng-template matStepLabel>Фамилия, имя, отчество</ng-template>
+      <mat-form-field>
+        <mat-label>Введите ФИО</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error>Это поле не заполнено</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Далее</button>
+      </div>
+    </mat-step>
+    <!-- Дата рождения -->
+    <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+      <ng-template matStepLabel>Дата рождения</ng-template>
+      <mat-form-field>
+      <mat-label>Введите дату рождения</mat-label>
+      <input matInput formControlName="dob" required>
+        <mat-error>Это поле не заполнено</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious type="button">Вернуться</button>
+        <button mat-button matStepperNext type="button">Далее</button>
+      </div>
+    </mat-step>
+    <!-- ПОЛ -->
+    <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
+      <ng-template matStepLabel>Пол</ng-template>
+      <mat-form-field>
+      <mat-label>Выберите пол</mat-label>
+          <mat-select formControlName="sex">
+              <mat-option *ngFor="let sex of Sex" [value]="sex.value">
+                {{sex.viewValue}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious type="button">Вернуться</button>
+        <button mat-button matStepperNext type="button">Далее</button>
+      </div>
+    </mat-step>
+    <!-- СНИЛС -->
+    <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
+      <ng-template matStepLabel>СНИЛС</ng-template>
+      <mat-form-field>
+      <mat-label>СНИЛС</mat-label>
+      <input matInput formControlName="snils" required>
+        <mat-error>Это поле не заполнено</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious type="button">Вернуться</button>
+        <button mat-button matStepperNext type="button" (click)="addArray(); stepper.reset()">Далее</button>
+      </div>
+    </mat-step>
 
-          <mat-step>
-            <ng-template matStepLabel>Fill out your date of birth</ng-template>
-            <mat-form-field>
-              <input matInput placeholder="dob" formControlName="dob" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious type="button">Back</button>
-              <button mat-button matStepperNext type="button">Next</button>
-            </div>
-          </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        You are now done.
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-      </mat-step>
-        </mat-horizontal-stepper>
-      </form>
-</mat-card>
+  </mat-horizontal-stepper>
+</form>

@@ -35,4 +35,4 @@ import {MatIconModule} from '@angular/material/icon';
   providers: [AppService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
