@@ -40,9 +40,7 @@ export class FormComponent implements OnInit {
 
 addArray() {
     console.log(this.formGroup.value);
-  };
-addUser(e) {
-    this.dataSource.formArray.push(e.value);
+    this.dataSource.formArray.push();
   }
 }
 

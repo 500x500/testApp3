@@ -4,14 +4,10 @@ import {AppService} from '../services/app.service';
 
 export interface AppService {
   name: string;
-  dob: number;
+  dob: string;
   sex: string;
-  snils: number;
+  snils: string;
 }
-
-// const USER_DATA: formArray = [
-//       {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//     ];
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -24,16 +20,18 @@ export interface AppService {
 export class TableComponent {
   displayedColumns: string[] = ['select', 'position', 'name', 'dob', 'sex', 'snils'];
 
-  //selection = new SelectionModel<formArray>(true, []);
+  selection = new SelectionModel<AppService>(true, []);
 
-  constructor(private dataSource: AppService) {}
+  constructor(private dataSource: AppService) {
+  }
+
   formArray = this.dataSource.formArray;
 
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.formArray.length;
     return numSelected === numRows;
   }
 
@@ -41,14 +39,14 @@ export class TableComponent {
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.formArray.forEach(row => this.selection.select(row));
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: formArray): string {
+  checkboxLabel(row?: AppService): string {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
- }
+}
