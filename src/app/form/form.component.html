@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" (ngSubmit)="addUser(formGroup)">
+<form [formGroup]="formGroup">
   <mat-horizontal-stepper formArrayName="formArray" linear  #stepper>
     <!-- ФИО -->
     <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
