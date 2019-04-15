@@ -1,18 +1,17 @@
 import {SelectionModel} from '@angular/cdk/collections';
 import {Component} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
 import {AppService} from '../services/app.service';
 
-// export interface PeriodicElement {
-//   name: string;
-//   position: number;
-//   weight: number;
-//   symbol: string;
-// }
+export interface AppService {
+  name: string;
+  dob: number;
+  sex: string;
+  snils: number;
+}
 
-const USER_DATA: formArray[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-];
+// const USER_DATA: formArray = [
+//       {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+//     ];
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -25,9 +24,11 @@ const USER_DATA: formArray[] = [
 export class TableComponent {
   displayedColumns: string[] = ['select', 'position', 'name', 'dob', 'sex', 'snils'];
 
-  selection = new SelectionModel<formArray>(true, []);
+  //selection = new SelectionModel<formArray>(true, []);
 
   constructor(private dataSource: AppService) {}
+  formArray = this.dataSource.formArray;
+
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -50,4 +51,4 @@ export class TableComponent {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
-}
+ }
