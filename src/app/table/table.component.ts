@@ -3,10 +3,10 @@ import {Component} from '@angular/core';
 import {AppService} from '../services/app.service';
 
 export interface AppService {
-  name: string;
-  dob: string;
-  sex: string;
-  snils: string;
+name: string;
+dob: number;
+sex: string;
+snils: number;
 }
 
 /**
@@ -18,7 +18,7 @@ export interface AppService {
   templateUrl: './table.component.html',
 })
 export class TableComponent {
-  displayedColumns: string[] = ['select', 'position', 'name', 'dob', 'sex', 'snils'];
+  displayedColumns: string[] = ['select', 'name', 'dob', 'sex', 'snils'];
 
   selection = new SelectionModel<AppService>(true, []);
 
