@@ -7,7 +7,7 @@
         <mat-label>Введите ФИО</mat-label>
         <input matInput formControlName="name" required>
         <mat-error>Это поле не заполнено</mat-error>
-      </mat-form-field>
+   
       <div>
         <button mat-button matStepperNext>Далее</button>
       </div>
@@ -15,11 +15,11 @@
     <!-- Дата рождения -->
     <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
       <ng-template matStepLabel>Дата рождения</ng-template>
-      <mat-form-field>
+      
       <mat-label>Введите дату рождения</mat-label>
       <input matInput formControlName="dob" required>
         <mat-error>Это поле не заполнено</mat-error>
-      </mat-form-field>
+      
       <div>
         <button mat-button matStepperPrevious type="button">Вернуться</button>
         <button mat-button matStepperNext type="button">Далее</button>
@@ -28,14 +28,14 @@
     <!-- ПОЛ -->
     <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
       <ng-template matStepLabel>Пол</ng-template>
-      <mat-form-field>
+   
       <mat-label>Выберите пол</mat-label>
           <mat-select formControlName="sex">
               <mat-option *ngFor="let sex of Sex" [value]="sex.value">
                 {{sex.viewValue}}
               </mat-option>
           </mat-select>
-        </mat-form-field>
+      
       <div>
         <button mat-button matStepperPrevious type="button">Вернуться</button>
         <button mat-button matStepperNext type="button">Далее</button>
@@ -44,7 +44,7 @@
     <!-- СНИЛС -->
     <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
       <ng-template matStepLabel>СНИЛС</ng-template>
-      <mat-form-field>
+     
       <mat-label>СНИЛС</mat-label>
       <input matInput formControlName="snils" required>
         <mat-error>Это поле не заполнено</mat-error>
