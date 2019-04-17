@@ -9,16 +9,26 @@ import {AppService} from '../services/app.service';
 })
 
 export class FormComponent implements OnInit {
-
+  isLinear = true;
   formGroup: FormGroup;
-  constructor(private formBuilder: FormBuilder, private dataSource: AppService) {}
+  today = new Date().toJSON().split('T')[0];
 
+  constructor(private formBuilder: FormBuilder, private dataSource: AppService) {
+  }
+
+  sexs: Sex[] = [
+    {value: 'Женский', viewValue: 'Женский'},
+    {value: 'Мужской', viewValue: 'Мужской'},
+  ];
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
       formArray: this.formBuilder.array([
         this.formBuilder.group({
-          name: ['', Validators.required],
+          name: ['', [
+            Validators.required,
+            Validators.pattern(/[А-я]/)
+          ]]
         }),
         this.formBuilder.group({
           dob: ['', Validators.required],
@@ -33,15 +43,12 @@ export class FormComponent implements OnInit {
     });
   }
 
-  Sex: sex[] = [
-    {value: 'Женский', viewValue: 'Женский'},
-    {value: 'Мужской', viewValue: 'Мужской'},
-  ];
-
-addArray() {
+  addArray() {
     console.log(this.formGroup.value);
-  this.dataSource.addRow(this.formGroup.value.formArray);
+    this.dataSource.addRow(this.formGroup.value.formArray);
   }
 }
-
-
+export interface Sex {
+  value: string;
+  viewValue: string;
+}

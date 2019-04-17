@@ -5,8 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 
 export class AppService {
     public formArray$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([
-      { name: 'Tikhon', dob: '10.12.1993', sex: 'мужской', snils: '555' },
-      { name: 'Tikhon', dob: '10.12.1993', sex: 'мужской', snils: '555' }
     ]);
 public addRow(value: {[key: string]: string}[]) {
     let current = this.formArray$.value.slice();

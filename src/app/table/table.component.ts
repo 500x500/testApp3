@@ -19,9 +19,8 @@ export interface AppService {
 })
 export class TableComponent {
   displayedColumns: string[] = ['select', 'name', 'dob', 'sex', 'snils'];
-
+  data = this.formArray$;
   selection = new SelectionModel<AppService>(true, []);
-
   constructor(private dataSource: AppService) {
   }
 
@@ -48,6 +47,6 @@ export class TableComponent {
     if (!row) {
       return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
   }
 }
